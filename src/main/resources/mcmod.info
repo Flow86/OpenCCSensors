@@ -2,7 +2,7 @@
 {
   "modid": "OCS",
   "name": "OpenCCSensors",
-  "description": "Adds some missing recipes.",
+  "description": "",
   "version": "${version}",
   "mcversion": "${mc_version}",
   "url": "https://github.com/Flow86/OpenCCSensors",
