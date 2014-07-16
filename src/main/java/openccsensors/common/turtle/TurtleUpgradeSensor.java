@@ -9,7 +9,6 @@ import net.minecraft.util.IIcon;
 import openccsensors.OpenCCSensors;
 import openccsensors.common.peripheral.PeripheralSensor;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.turtle.ITurtleAccess;
 import dan200.computercraft.api.turtle.ITurtleUpgrade;
@@ -33,8 +32,7 @@ public class TurtleUpgradeSensor implements ITurtleUpgrade {
 
 	@Override
 	public String getUnlocalisedAdjective() {
-		String translation = LanguageRegistry.instance().getStringLocalization("turtle.openccsensors.sensor.adjective");
-		return translation == "" ? LanguageRegistry.instance().getStringLocalization("turtle.openccsensors.sensor.adjective", "en_US") : translation;
+		return "turtle.openccsensors.sensor.adjective";
 	}
 
 	@Override
@@ -64,7 +62,7 @@ public class TurtleUpgradeSensor implements ITurtleUpgrade {
 
 	public void addTurtlesToCreative(List subItems) {
 		for (int i = 0; i <= 7; i++) {
-			ItemStack turtle = GameRegistry.findItemStack("CCTurtle", "CC-TurtleExpanded", 1);
+			ItemStack turtle = GameRegistry.findItemStack("ComputerCraft", "CC-TurtleExpanded", 1);
 			if (turtle != null) {
 				NBTTagCompound tag = turtle.getTagCompound();
 				if (tag == null) {
