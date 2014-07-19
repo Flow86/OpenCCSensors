@@ -40,7 +40,7 @@ minecraft {
     
     runDir = "run/assets"
     
-    replaceIn "**/*.java"
+    replaceIn "OpenCCSensors.java"
     replace "@VERSION@",       project.ext.baseversion
     replace "@BUILDNUMBER@",   project.ext.buildnumber
     replace "@MC_VERSION@",    project.minecraft.version
