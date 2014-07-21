@@ -68,7 +68,7 @@ public class Ic2Utils {
 				try {
 					Method getOfferedEnergy = reactor.getClass().getMethod("getOfferedEnergy", null);
 
-					System.out.println(reactor.getReactorEnergyOutput() + " vs " + getOfferedEnergy.invoke(reactor, null));
+					// System.out.println(reactor.getReactorEnergyOutput() + " vs " + getOfferedEnergy.invoke(reactor, null));
 
 					response.put("Output", getOfferedEnergy.invoke(reactor, null));
 				} catch (Exception e2) {
