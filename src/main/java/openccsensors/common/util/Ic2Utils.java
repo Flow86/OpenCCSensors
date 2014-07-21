@@ -12,6 +12,7 @@ import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
 import ic2.api.tile.IEnergyStorage;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,6 +39,7 @@ public class Ic2Utils {
 				target instanceof IReactor || target instanceof IReactorChamber);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static HashMap getMachineDetails(World world, Object obj, boolean additional) {
 
 		HashMap response = new HashMap();
@@ -60,7 +62,19 @@ public class Ic2Utils {
 			int heat = reactor.getHeat();
 			response.put("Heat", heat);
 			response.put("MaxHeat", maxHeat);
-			response.put("Output", reactor.getReactorEnergyOutput() * IC2Reactor.getEUOutput());
+			try {
+				response.put("Output", reactor.getReactorEnergyOutput() * IC2Reactor.getEUOutput());
+			} catch (RuntimeException e) {
+				try {
+					Method getOfferedEnergy = reactor.getClass().getMethod("getOfferedEnergy", null);
+
+					System.out.println(reactor.getReactorEnergyOutput() + " vs " + getOfferedEnergy.invoke(reactor, null));
+
+					response.put("Output", getOfferedEnergy.invoke(reactor, null));
+				} catch (Exception e2) {
+					response.put("Output", null);
+				}
+			}
 			response.put("Active", reactor.produceEnergy());
 			response.put("HeatPercentage", 0);
 			if (maxHeat > 0) {
