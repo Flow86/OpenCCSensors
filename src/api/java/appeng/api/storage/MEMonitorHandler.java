@@ -158,4 +158,10 @@ public class MEMonitorHandler<StackType extends IAEStack> implements IMEMonitor<
 		return getHandler().getSlot();
 	}
 
+	@Override
+	public boolean validForPass(int i)
+	{
+		return getHandler().validForPass( i );
+	}
+
 }

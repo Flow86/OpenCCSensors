@@ -5,7 +5,10 @@ import io.netty.buffer.ByteBuf;
 import java.io.IOException;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
+import appeng.api.networking.crafting.ICraftingLink;
+import appeng.api.networking.crafting.ICraftingRequester;
 import appeng.api.networking.energy.IEnergySource;
 import appeng.api.networking.security.BaseActionSource;
 import appeng.api.storage.data.IAEFluidStack;
@@ -14,6 +17,14 @@ import appeng.api.storage.data.IItemList;
 
 public interface IStorageHelper
 {
+
+	/**
+	 * load a crafting link from nbt data.
+	 * 
+	 * @param data
+	 * @return
+	 */
+	ICraftingLink loadCraftingLink(NBTTagCompound data, ICraftingRequester req);
 
 	/**
 	 * @param is
@@ -40,7 +51,7 @@ public interface IStorageHelper
 	 * @return a new instance of {@link IItemList} for fluids
 	 */
 	IItemList<IAEFluidStack> createFluidList();
-	
+
 	/**
 	 * Read a AE Item Stack from a byte stream, returns a AE item stack or null.
 	 * 

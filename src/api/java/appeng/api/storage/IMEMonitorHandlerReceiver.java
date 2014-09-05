@@ -1,6 +1,7 @@
 package appeng.api.storage;
 
 import appeng.api.networking.security.BaseActionSource;
+import appeng.api.networking.storage.IBaseMonitor;
 import appeng.api.storage.data.IAEStack;
 
 public interface IMEMonitorHandlerReceiver<StackType extends IAEStack>
@@ -19,7 +20,7 @@ public interface IMEMonitorHandlerReceiver<StackType extends IAEStack>
 	 * 
 	 * @param change
 	 */
-	void postChange(IMEMonitor<StackType> monitor, StackType change, BaseActionSource actionSource);
+	void postChange(IBaseMonitor<StackType> monitor, StackType change, BaseActionSource actionSource);
 
 	/**
 	 * called when the list updates its contents, this is mostly for handling power events.

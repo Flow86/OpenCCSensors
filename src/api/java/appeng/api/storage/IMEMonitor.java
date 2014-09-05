@@ -1,20 +1,11 @@
 package appeng.api.storage;
 
+import appeng.api.networking.storage.IBaseMonitor;
 import appeng.api.storage.data.IAEStack;
 import appeng.api.storage.data.IItemList;
 
-public interface IMEMonitor<T extends IAEStack> extends IMEInventoryHandler<T>
+public interface IMEMonitor<T extends IAEStack> extends IMEInventoryHandler<T>, IBaseMonitor<T>
 {
-
-	/**
-	 * add a new Listener to the monitor, be sure to properly remove yourself when your done.
-	 */
-	void addListener(IMEMonitorHandlerReceiver<T> l, Object verificationToken);
-
-	/**
-	 * remove a Listener to the monitor.
-	 */
-	void removeListener(IMEMonitorHandlerReceiver<T> l);
 
 	@Override
 	@Deprecated

@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -20,7 +21,7 @@ import appeng.api.networking.IGridNode;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public interface IPart
+public interface IPart extends IBoxProvider
 {
 
 	/**
@@ -75,6 +76,13 @@ public interface IPart
 	 */
 	@SideOnly(Side.CLIENT)
 	void renderDynamic(double x, double y, double z, IPartRenderHelper rh, RenderBlocks renderer);
+
+	/**
+	 * @return the Block sheet icon used when rendering the breaking particles, return null to use the ItemStack
+	 *         texture.
+	 */
+	@SideOnly(Side.CLIENT)
+	IIcon getBreakingTexture();
 
 	/**
 	 * return true only if your part require dynamic rendering, must be consistent.
@@ -197,13 +205,6 @@ public interface IPart
 	void setPartHostInfo(ForgeDirection side, IPartHost host, TileEntity tile);
 
 	/**
-	 * add your collision information to the the list.
-	 * 
-	 * @param boxes
-	 */
-	void getBoxes(IPartCollsionHelper bch);
-
-	/**
 	 * Called when you right click the part, very similar to Block.onActivateBlock
 	 * 
 	 * @param player
@@ -262,4 +263,5 @@ public interface IPart
 	 * @return true if the part can be placed on this support.
 	 */
 	boolean canBePlacedOn(BusSupport what);
+
 }

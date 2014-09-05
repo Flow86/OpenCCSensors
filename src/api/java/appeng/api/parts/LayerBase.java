@@ -28,6 +28,13 @@ public class LayerBase extends TileEntity // implements IPartHost
 	/**
 	 * called when the parts change in the container, YOU MUST CALL super.PartChanged();
 	 */
+	public void notifyNeighbors()
+	{
+	}
+
+	/**
+	 * called when the parts change in the container, YOU MUST CALL super.PartChanged();
+	 */
 	public void partChanged()
 	{
 	}
@@ -44,4 +51,5 @@ public class LayerBase extends TileEntity // implements IPartHost
 	{
 		// something!
 	}
+
 }

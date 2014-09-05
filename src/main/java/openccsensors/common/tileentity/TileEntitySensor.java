@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import openccsensors.api.ISensorEnvironment;
 import openccsensors.common.peripheral.PeripheralSensor;
 import dan200.computercraft.api.lua.ILuaContext;
+import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 
@@ -127,7 +128,7 @@ public class TileEntitySensor extends TileEntity implements ISensorEnvironment, 
 	}
 
 	@Override
-	public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments) throws Exception {
+	public Object[] callMethod(IComputerAccess computer, ILuaContext context, int method, Object[] arguments) throws LuaException, InterruptedException {
 		return peripheral.callMethod(computer, context, method, arguments);
 	}
 

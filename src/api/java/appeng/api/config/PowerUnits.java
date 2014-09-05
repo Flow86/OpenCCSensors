@@ -5,9 +5,9 @@ public enum PowerUnits
 	AE("gui.appliedenergistics2.units.appliedenergstics"), // Native Units - AE Energy
 	MJ("gui.appliedenergistics2.units.buildcraft"), // BuildCraft - Minecraft Joules
 	EU("gui.appliedenergistics2.units.ic2"), // IndustrialCraft 2 - Energy Units
-	KJ("gui.appliedenergistics2.units.universalelectricity"), // Universal Electricity - KiloJoules
 	WA("gui.appliedenergistics2.units.rotarycraft"), // RotaryCraft - Watts
-	RF("gui.appliedenergistics2.units.thermalexpansion"); // ThermalExpansion - Redstone Flux
+	RF("gui.appliedenergistics2.units.thermalexpansion"), // ThermalExpansion - Redstone Flux
+	MK("gui.appliedenergistics2.units.mekanism"); // Mekanism - Joules
 
 	private PowerUnits(String un) {
 		unlocalizedName = un;

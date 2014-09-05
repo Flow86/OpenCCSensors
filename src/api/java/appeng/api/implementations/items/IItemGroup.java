@@ -1,5 +1,7 @@
 package appeng.api.implementations.items;
 
+import java.util.Set;
+
 import net.minecraft.item.ItemStack;
 
 /**
@@ -14,6 +16,6 @@ public interface IItemGroup
 	 * @param is
 	 * @return an unlocalized string to use for the items group name.
 	 */
-	String getUnlocalizedGroupName(ItemStack is);
+	String getUnlocalizedGroupName(Set<ItemStack> otherItems, ItemStack is);
 
 }

@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
 
 /**
  * Gives easy access to different part of the various, items/blocks/materials in AE.
@@ -37,6 +38,17 @@ public interface AEItemDefinition
 	 * @param comparableItem
 	 * @return true if the item stack is a matching item.
 	 */
-	boolean sameAs(ItemStack comparableItem);
+	boolean sameAsStack(ItemStack comparableItem);
 
+	/**
+	 * Compare Block with world.
+	 * 
+	 * @param world
+	 * @param x
+	 * @param y
+	 * @param z
+	 * 
+	 * @return if the block is placed in the world at the specific location.
+	 */
+	boolean sameAsBlock(IBlockAccess world, int x, int y, int z);
 }

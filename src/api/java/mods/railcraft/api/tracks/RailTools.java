@@ -1,5 +1,7 @@
 package mods.railcraft.api.tracks;
 
+import java.util.HashSet;
+import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.item.ItemBlock;
@@ -8,6 +10,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import mods.railcraft.api.core.items.ITrackItem;
+import mods.railcraft.api.electricity.IElectricGrid.ChargeHandler;
 import net.minecraft.block.BlockRailBase;
 
 /**
@@ -109,6 +112,90 @@ public abstract class RailTools {
 
     public static boolean isTrackFuzzyAt(World world, int x, int y, int z) {
         return BlockRailBase.func_150049_b_(world, x, y, z) ? true : (BlockRailBase.func_150049_b_(world, x, y + 1, z) ? true : BlockRailBase.func_150049_b_(world, x, y - 1, z));
+    }
+
+    public static Set<ITrackTile> getAdjecentTrackTiles(World world, int x, int y, int z) {
+        Set<ITrackTile> tracks = new HashSet<ITrackTile>();
+
+        ITrackTile tile = getTrackFuzzyAt(world, x, y, z - 1);
+        if (tile != null)
+            tracks.add(tile);
+
+        tile = getTrackFuzzyAt(world, x, y, z + 1);
+        if (tile != null)
+            tracks.add(tile);
+
+        tile = getTrackFuzzyAt(world, x - 1, y, z);
+        if (tile != null)
+            tracks.add(tile);
+
+        tile = getTrackFuzzyAt(world, x + 1, y, z);
+        if (tile != null)
+            tracks.add(tile);
+
+        return tracks;
+    }
+
+    public static ITrackTile getTrackFuzzyAt(World world, int x, int y, int z) {
+        TileEntity tile = world.getTileEntity(x, y, z);
+        if (tile instanceof ITrackTile)
+            return (ITrackTile) tile;
+        tile = world.getTileEntity(x, y + 1, z);
+        if (tile instanceof ITrackTile)
+            return (ITrackTile) tile;
+        tile = world.getTileEntity(x, y - 1, z);
+        if (tile instanceof ITrackTile)
+            return (ITrackTile) tile;
+        return null;
+    }
+
+    public static <T> Set<T> getAdjecentTrackObjects(World world, int x, int y, int z, Class<T> type) {
+        Set<T> tracks = new HashSet<T>();
+
+        T object = getTrackObjectFuzzyAt(world, x, y, z - 1, type);
+        if (object != null)
+            tracks.add(object);
+
+        object = getTrackObjectFuzzyAt(world, x, y, z + 1, type);
+        if (object != null)
+            tracks.add(object);
+
+        object = getTrackObjectFuzzyAt(world, x - 1, y, z, type);
+        if (object != null)
+            tracks.add(object);
+
+        object = getTrackObjectFuzzyAt(world, x + 1, y, z, type);
+        if (object != null)
+            tracks.add(object);
+
+        return tracks;
+    }
+
+    public static <T> T getTrackObjectFuzzyAt(World world, int x, int y, int z, Class<T> type) {
+        T object = getTrackObjectAt(world, x, y, z, type);
+        if (object != null)
+            return object;
+        object = getTrackObjectAt(world, x, y + 1, z, type);
+        if (object != null)
+            return object;
+        object = getTrackObjectAt(world, x, y - 1, z, type);
+        if (object != null)
+            return object;
+        return null;
+    }
+
+    public static <T> T getTrackObjectAt(World world, int x, int y, int z, Class<T> type) {
+        TileEntity tile = world.getTileEntity(x, y, z);
+        if (tile == null)
+            return null;
+        if (type.isInstance(tile))
+            return (T) tile;
+        if (tile instanceof ITrackTile) {
+            ITrackInstance track = ((ITrackTile) tile).getTrackInstance();
+            if (type.isInstance(track))
+                return (T) track;
+        }
+        return null;
     }
 
 }

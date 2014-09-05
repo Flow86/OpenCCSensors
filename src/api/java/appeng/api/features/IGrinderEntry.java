@@ -37,6 +37,13 @@ public interface IGrinderEntry
 	public ItemStack getOptionalOutput();
 
 	/**
+	 * gets the current output
+	 * 
+	 * @return output that the grinder will produce
+	 */
+	public ItemStack getSecondOptionalOutput();
+
+	/**
 	 * allows you to change the output.
 	 * 
 	 * @param output
@@ -57,6 +64,21 @@ public interface IGrinderEntry
 	 * @return
 	 */
 	public float getOptionalChance();
+
+	/**
+	 * stack, and 0.0-1.0 chance that it will be generated.
+	 * 
+	 * @param output
+	 * @param chance
+	 */
+	public void setSecondOptionalOutput(ItemStack output, float chance);
+
+	/**
+	 * 0.0 - 1.0 the chance that the optional output will be generated.
+	 * 
+	 * @return
+	 */
+	public float getSecondOptionalChance();
 
 	/**
 	 * Energy cost, in turns.

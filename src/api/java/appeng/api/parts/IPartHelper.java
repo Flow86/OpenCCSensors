@@ -55,4 +55,8 @@ public interface IPartHelper
 	 */
 	boolean placeBus(ItemStack is, int x, int y, int z, int side, EntityPlayer player, World world);
 
+	/**
+	 * @return the render mode
+	 */
+	CableRenderMode getCableRenderMode();
 }

@@ -50,4 +50,12 @@ public interface IPartCable extends IPart, IGridHost
 	 */
 	void setValidSides(EnumSet<ForgeDirection> sides);
 
+	/**
+	 * used to tests if a cable connects to neighbors visually.
+	 * 
+	 * @param side
+	 * @return true if this side is currently connects to an external block.
+	 */
+	boolean isConnected(ForgeDirection side);
+
 }

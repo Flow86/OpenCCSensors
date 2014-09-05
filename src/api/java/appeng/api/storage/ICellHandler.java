@@ -27,18 +27,39 @@ public interface ICellHandler
 	 * 
 	 * @param is
 	 *            a storage cell item.
+	 * @param save
+	 *            host, anytime the contents of your storage cell changes it should use this to request a save, please
+	 *            note, this value can be null.
+	 * @param the
+	 *            storage channel requested.
 	 * 
 	 * @return a new IMEHandler for the provided item
 	 */
-	IMEInventoryHandler getCellInventory(ItemStack is, StorageChannel channel);
+	IMEInventoryHandler getCellInventory(ItemStack is, ISaveProvider host, StorageChannel channel);
 
 	/**
-	 * @return the ME Chest texture for this storage cell type, should be 10x10 with 3px of transparent padding on a
-	 *         16x16 texture, null is valid if your cell cannot be used in the ME Chest. refer to the assets for
-	 *         examples and colors.
+	 * @return the ME Chest texture for light pixels this storage cell type, should be 10x10 with 3px of transparent
+	 *         padding on a 16x16 texture, null is valid if your cell cannot be used in the ME Chest. refer to the
+	 *         assets for examples.
 	 */
 	@SideOnly(Side.CLIENT)
-	IIcon getTopTexture();
+	IIcon getTopTexture_Light();
+
+	/**
+	 * @return the ME Chest texture for medium pixels this storage cell type, should be 10x10 with 3px of transparent
+	 *         padding on a 16x16 texture, null is valid if your cell cannot be used in the ME Chest. refer to the
+	 *         assets for examples.
+	 */
+	@SideOnly(Side.CLIENT)
+	IIcon getTopTexture_Medium();
+
+	/**
+	 * @return the ME Chest texture for dark pixels this storage cell type, should be 10x10 with 3px of transparent
+	 *         padding on a 16x16 texture, null is valid if your cell cannot be used in the ME Chest. refer to the
+	 *         assets for examples.
+	 */
+	@SideOnly(Side.CLIENT)
+	IIcon getTopTexture_Dark();
 
 	/**
 	 * 

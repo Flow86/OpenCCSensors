@@ -11,8 +11,6 @@ import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -111,19 +109,15 @@ public class EntityUtils {
 				map.put("Gamemode", player.capabilities.isCreativeMode);
 				map.put("Inventory", InventoryUtils.invToMap(player.inventory));
 
-				Vec3 posVec = player.worldObj.getWorldVec3Pool().getVecFromPool(player.posX, player.posY + 1.62F, player.posZ);
-				Vec3 lookVec = player.getLook(1.0f);
-				Vec3 targetVec = posVec.addVector(lookVec.xCoord * 10f, lookVec.yCoord * 10f, lookVec.zCoord * 10f);
-				MovingObjectPosition mop = player.worldObj.rayTraceBlocks(posVec, targetVec);
-				map.put("IsLookingAtBlock", mop.typeOfHit == MovingObjectType.ENTITY);
-				if (mop.typeOfHit == MovingObjectType.ENTITY) {
-					// int blockId = player.worldObj.getBlockId(mop.blockX, mop.blockY, mop.blockZ);
-					HashMap lookingAt = new HashMap();
-					lookingAt.put("X", mop.blockX - sensorPos.posX);
-					lookingAt.put("Y", mop.blockY - sensorPos.posY);
-					lookingAt.put("Z", mop.blockZ - sensorPos.posZ);
-					map.put("LookingAt", lookingAt);
-				}
+				/*
+				 * TODO: Vec3 posVec = player.worldObj.getWorldVec3Pool().getVecFromPool(player.posX, player.posY + 1.62F, player.posZ);
+				 * 
+				 * Vec3 lookVec = player.getLook(1.0f); Vec3 targetVec = posVec.addVector(lookVec.xCoord * 10f, lookVec.yCoord * 10f, lookVec.zCoord * 10f);
+				 * MovingObjectPosition mop = player.worldObj.rayTraceBlocks(posVec, targetVec); map.put("IsLookingAtBlock", mop.typeOfHit ==
+				 * MovingObjectType.ENTITY); if (mop.typeOfHit == MovingObjectType.ENTITY) { // int blockId = player.worldObj.getBlockId(mop.blockX, mop.blockY,
+				 * mop.blockZ); HashMap lookingAt = new HashMap(); lookingAt.put("X", mop.blockX - sensorPos.posX); lookingAt.put("Y", mop.blockY -
+				 * sensorPos.posY); lookingAt.put("Z", mop.blockZ - sensorPos.posZ); map.put("LookingAt", lookingAt); }
+				 */
 			}
 
 			map.put("Experience", player.experience);
@@ -134,7 +128,7 @@ public class EntityUtils {
 			map.put("IsSitting", tameable.isSitting());
 			map.put("IsTamed", tameable.isTamed());
 			if (tameable.isTamed()) {
-				map.put("OwnerName", tameable.getOwnerName());
+				map.put("OwnerName", tameable.getOwner().getCommandSenderName());
 			}
 			if (tameable instanceof EntityWolf) {
 				EntityWolf wolf = (EntityWolf) tameable;

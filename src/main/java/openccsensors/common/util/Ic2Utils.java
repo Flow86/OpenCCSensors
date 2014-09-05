@@ -4,10 +4,10 @@ import ic2.api.crops.CropCard;
 import ic2.api.crops.Crops;
 import ic2.api.crops.ICropTile;
 import ic2.api.energy.EnergyNet;
+import ic2.api.energy.NodeStats;
 import ic2.api.energy.tile.IEnergyConductor;
 import ic2.api.energy.tile.IEnergySink;
 import ic2.api.energy.tile.IEnergySource;
-import ic2.api.reactor.IC2Reactor;
 import ic2.api.reactor.IReactor;
 import ic2.api.reactor.IReactorChamber;
 import ic2.api.tile.IEnergyStorage;
@@ -63,7 +63,7 @@ public class Ic2Utils {
 			response.put("Heat", heat);
 			response.put("MaxHeat", maxHeat);
 			try {
-				response.put("Output", reactor.getReactorEnergyOutput() * IC2Reactor.getEUOutput());
+				response.put("Output", reactor.getReactorEUEnergyOutput());
 			} catch (RuntimeException e) {
 				try {
 					Method getOfferedEnergy = reactor.getClass().getMethod("getOfferedEnergy", null);
@@ -95,6 +95,7 @@ public class Ic2Utils {
 		return response;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static HashMap getPowerDetails(World world, Object obj, boolean additional) {
 
 		HashMap response = new HashMap();
@@ -125,10 +126,11 @@ public class Ic2Utils {
 
 			tile = EnergyNet.instance.getTileEntity(tile.getWorldObj(), tile.xCoord, tile.yCoord, tile.zCoord);
 			if (tile != null) {
-				long emitted = EnergyNet.instance.getTotalEnergyEmitted(tile);
-				long sunken = EnergyNet.instance.getTotalEnergySunken(tile);
-				response.put("EnergyEmitted", emitted);
-				response.put("EnergySunken", sunken);
+				NodeStats stats = EnergyNet.instance.getNodeStats(tile);
+
+				response.put("EnergySunken", stats.getEnergyIn());
+				response.put("EnergyEmitted", stats.getEnergyOut());
+				response.put("EnergyVoltage", stats.getVoltage());
 			}
 		}
 
@@ -145,6 +147,7 @@ public class Ic2Utils {
 		return tile instanceof ICropTile;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Map getCropDetails(Object obj, ChunkCoordinates sensorPos, boolean additional) {
 		HashMap response = new HashMap();
 		if (obj == null)

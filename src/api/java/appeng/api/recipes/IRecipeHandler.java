@@ -15,8 +15,8 @@ public interface IRecipeHandler
 	void parseRecipes(IRecipeLoader loader, String path);
 
 	/**
-	 * this loads the read recipes into minecraft.
+	 * this loads the read recipes into minecraft, should be called in Init.
 	 */
-	void registerHandlers();
+	void injectRecipes();
 
 }

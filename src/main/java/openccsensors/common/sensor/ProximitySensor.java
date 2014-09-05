@@ -74,10 +74,8 @@ public class ProximitySensor implements ISensor, IRequiresIconLoading {
 			klazz = EntityPlayer.class;
 		}
 
-		List list = world.getEntitiesWithinAABB(
-				klazz,
-				AxisAlignedBB.getAABBPool().getAABB(location.xCoord - 16.0F, location.yCoord - 16.0F, location.zCoord - 16.0F, location.xCoord + 16.0F,
-						location.yCoord + 16.0F, location.zCoord + 16.0F));
+		List list = world.getEntitiesWithinAABB(klazz, AxisAlignedBB.getBoundingBox(location.xCoord - 16.0F, location.yCoord - 16.0F, location.zCoord - 16.0F,
+				location.xCoord + 16.0F, location.yCoord + 16.0F, location.zCoord + 16.0F));
 
 		double closestDistance = Double.MAX_VALUE;
 		Vec3 livingPos = Vec3.createVectorHelper(0, 0, 0);

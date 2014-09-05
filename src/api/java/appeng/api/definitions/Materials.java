@@ -47,6 +47,7 @@ public class Materials
 	public AEItemDefinition materialCardCapacity;
 	public AEItemDefinition materialCardFuzzy;
 	public AEItemDefinition materialCardInverter;
+	public AEItemDefinition materialCardCrafting;
 
 	public AEItemDefinition materialEnderDust;
 	public AEItemDefinition materialFlour;
@@ -74,5 +75,6 @@ public class Materials
 
 	public AEItemDefinition materialSingularity;
 	public AEItemDefinition materialQESingularity;
+	public AEItemDefinition materialBlankPattern;
 
 }

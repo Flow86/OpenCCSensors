@@ -18,7 +18,7 @@ public interface IGrinderRegistry
 	public List<IGrinderEntry> getRecipes();
 
 	/**
-	 * add a new recipe the easy way, in -> out, how many turns.
+	 * add a new recipe the easy way, in -> out, how many turns., duplicates will not be added.
 	 * 
 	 * @param in
 	 * @param out
@@ -27,15 +27,31 @@ public interface IGrinderRegistry
 	public void addRecipe(ItemStack in, ItemStack out, int turns);
 
 	/**
-	 * add a new recipe with optional outputs
+	 * add a new recipe with optional outputs, duplicates will not be added.
 	 * 
 	 * @param in
 	 * @param out
 	 * @param optional
 	 * @param chance
+	 *            ( value 0.0 - 1.0 )
 	 * @param turns
 	 */
 	void addRecipe(ItemStack in, ItemStack out, ItemStack optional, float chance, int turns);
+
+	/**
+	 * add a new recipe with optional outputs, duplicates will not be added.
+	 * 
+	 * @param in
+	 * @param out
+	 * @param optional
+	 * @param chance
+	 *            ( value 0.0 - 1.0 )
+	 * @param optional2
+	 * @param chance2
+	 *            ( value 0.0 - 1.0 )
+	 * @param turns
+	 */
+	void addRecipe(ItemStack in, ItemStack out, ItemStack optional, float chance, ItemStack optional2, float chance2, int cost);
 
 	/**
 	 * Searches for a recipe for a given input, and returns it.

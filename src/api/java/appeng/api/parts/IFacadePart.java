@@ -1,6 +1,7 @@
 package appeng.api.parts;
 
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -25,8 +26,9 @@ public interface IFacadePart
 	 * used to collide, and pick the part
 	 * 
 	 * @param ch
+	 * @param e
 	 */
-	void getBoxes(IPartCollsionHelper ch);
+	void getBoxes(IPartCollsionHelper ch, Entity e);
 
 	/**
 	 * render the part.

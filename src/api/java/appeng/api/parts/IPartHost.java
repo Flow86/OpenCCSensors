@@ -137,4 +137,16 @@ public interface IPartHost
 	 * remove host from world...
 	 */
 	void cleanup();
+
+	/**
+	 * notify neightbors uf updated status.
+	 */
+	void notifyNeighbors();
+
+	/**
+	 * true if the tile is in the world, other wise false.
+	 * 
+	 * @return
+	 */
+	boolean isInWorld();
 }
